@@ -1,0 +1,36 @@
+{
+  "version": 5,
+  "cmakeMinimumRequired": { "major": 3, "minor": 24, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "ninja-ortools",
+      "displayName": "OR-Tools 9.14 local install",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "/usr/local/ortools-9.14",
+        "RUNWAY_WITH_ORTOOLS": "ON",
+        "RUNWAY_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "ninja-core-only",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-core",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "RUNWAY_WITH_ORTOOLS": "OFF",
+        "RUNWAY_BUILD_TESTS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "ninja-ortools", "configurePreset": "ninja-ortools" },
+    { "name": "ninja-core-only", "configurePreset": "ninja-core-only" }
+  ],
+  "testPresets": [
+    { "name": "ninja-ortools", "configurePreset": "ninja-ortools" },
+    { "name": "ninja-core-only", "configurePreset": "ninja-core-only" }
+  ]
+}
